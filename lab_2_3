@@ -1,0 +1,42 @@
+#include <stdio.h>
+
+// Function prototype for computing the ND
+int nd(int n1, int n2);
+
+int main() {
+    int numerator, denominator, nd_value;
+
+    // Read numerator and denominator from the user
+    printf("Enter the numerator: ");
+    scanf("%d", &numerator);x
+    printf("Enter the denominator: ");
+    scanf("%d", &denominator);
+
+    // Check for valid input (positive integers)
+    if (numerator <= 0 || denominator <= 0) {
+        printf("Both numerator and denominator must be positive integers.\n");
+        return 1;
+    }
+
+    // Calculate the ND of numerator and denominator
+    nd_value = nd(numerator, denominator);
+
+    // Simplify the fraction
+    numerator /= nd_value;
+    denominator /= nd_value;
+
+    // Print the simplified fraction
+    printf("Simplified fraction: %d/%d\n", numerator, denominator);
+
+    return 0;
+}
+
+// Function to compute the ND using the Euclidean algorithm
+int nd(int n1, int n2) {
+    while (n2 != 0) {
+        int temp = n2;
+        n2 = n1 % n2;
+        n1 = temp;
+    }
+    return n1;
+}
