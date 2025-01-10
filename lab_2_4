@@ -1,0 +1,79 @@
+#include <stdio.h>
+
+// Fractions
+typedef struct {
+    int numerator;
+    int denominator;
+} Fraction;
+
+// The Largest gratest function
+int greatestdivisor(int a, int b);
+Fraction simplify(Fraction fraction);
+Fraction addFractions(Fraction f1, Fraction f2);
+
+int main() {
+    Fraction fraction1, fraction2, result;
+
+    // Input the first fraction
+    printf("Enter the numerator and denominator of the first fraction: ");
+    scanf("%d %d", &fraction1.numerator, &fraction1.denominator);
+
+    // Input the second fraction
+    printf("Enter the numerator and denominator of the second fraction: ");
+    scanf("%d %d", &fraction2.numerator, &fraction2.denominator);
+
+    // Check if the denominators are valid
+    if (fraction1.denominator == 0 || fraction2.denominator == 0) {
+        printf("Denominator cannot be zero. Exiting the program.\n");
+        return 1;
+    }
+
+    // Compute the sum of the two fractions
+    result = addFractions(fraction1, fraction2);
+
+    // Simplify the resulting fraction
+    result = simplify(result);
+
+    // Display the resulting simplified fraction
+    printf("The sum of the fractions is: %d/%d\n", result.numerator, result.denominator);
+
+    return 0;
+}
+
+// Function to compute the greatest common divisor (GCD) using the Euclidean algorithm
+int greatestdivisor(int a, int b) {
+    if (a < 0) a = -a; // Handle negative numbers
+    if (b < 0) b = -b; // Handle negative numbers
+    while (b != 0) {
+        int temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return a;
+}
+
+// Function to simplify a fraction
+Fraction simplify(Fraction fraction) {
+    int divisor = greatestdivisor(fraction.numerator, fraction.denominator);
+    fraction.numerator /= divisor;
+    fraction.denominator /= divisor;
+
+    // Ensure the denominator is always positive
+    if (fraction.denominator < 0) {
+        fraction.numerator = -fraction.numerator;
+        fraction.denominator = -fraction.denominator;
+    }
+
+    return fraction;
+}
+
+// Function to add two fractions
+Fraction addFractions(Fraction f1, Fraction f2) {
+    Fraction result;
+
+    // Compute the numerator and denominator of the sum
+    result.numerator = (f1.numerator * f2.denominator) + (f2.numerator * f1.denominator);
+    result.denominator = f1.denominator * f2.denominator;
+
+    return result;
+}
