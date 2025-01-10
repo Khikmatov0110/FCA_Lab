@@ -1,0 +1,47 @@
+#include <stdio.h>
+
+int main() {
+    int n, x, count, choice;
+    int v[100]; // Array to hold up to 100 integers
+
+    // Step 1: Read a positive integer n (at most 100)
+    do {
+        printf("Input n: ");
+        scanf("%d", &n);
+        if (n <= 0 || n > 100) {
+            printf("Invalid input. Please enter a positive integer between 1 and 100.\n");
+        }
+    } while (n <= 0 || n > 100);
+
+    // Step 2: Load the array v with n integer numbers
+    printf("Enter %d integer numbers:\n", n);
+    for (int i = 0; i < n; i++) {
+        printf("Input v[%d]: ", i);
+        scanf("%d", &v[i]);
+    }
+
+    // Step 3, 4, 5: Repeat search until user chooses to terminate
+    do {
+        count = 0;
+
+        // Read the number x to search for
+        printf("Input x: ");
+        scanf("%d", &x);
+
+        // Determine and print how many times x appears in the array
+        for (int i = 0; i < n; i++) {
+            if (v[i] == x) {
+                count++;
+            }
+        }
+        printf("Value %d appears %d time(s) in the array.\n", x, count);
+
+        // Ask the user if they want to search again
+        printf("Would you like to continue (1=yes, 0=no)? ");
+        scanf("%d", &choice);
+
+    } while (choice == 1);
+
+    printf("Program terminated.\n");
+    return 0;
+}
