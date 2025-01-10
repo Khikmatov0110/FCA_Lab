@@ -1,0 +1,26 @@
+#include <stdio.h>
+
+int main() {
+    int n, num = 1;
+
+    // Prompt the user for input
+    printf("Enter the number of rows for Floyd's triangle: ");
+    scanf("%d", &n);
+
+    // Ensure the input is a positive number
+    if (n <= 0) {
+        printf("Please enter a strictly positive integer.\n");
+        return 1;
+    }
+
+    // Generate and display Floyd's triangle
+    for (int i = 1; i <= n; i++) { // Loop for rows
+        for (int j = 1; j <= i; j++) { // Loop for numbers in each row
+            printf("%d ", num);
+            num++;
+        }
+        printf("\n"); // Move to the next row
+    }
+
+    return 0;
+}
